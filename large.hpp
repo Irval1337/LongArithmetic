@@ -33,6 +33,15 @@ public:
     large operator-=(const large& value) {
         return *this = (*this - value);
     }
+    large operator*=(const large& value) {
+        return *this = (*this * value);
+    }
+    large operator/=(const large& value) {
+        return *this = (*this / value);
+    }
+    large operator%=(const large& value) {
+        return *this = (*this % value);
+    }
     large operator++(int d) {
         auto tmp = *this;
         *this += large(1);
