@@ -187,25 +187,25 @@ public:
             while (num1.length() > 0) {
                 if (tmp == 0 && num1 == string(num1.length(), '0'))
                     return large(ans + num1);
-                if (tmp < val) {
+                if (tmp != 0) {
                     tmp *= 10;
                     tmp += atoi(num1.substr(0, 1).c_str());
                     num1.erase(0, 1);
-                    ans += moved ? "0" : "";
-                    moved = true;
-                }
-                if (tmp >= val) {
                     ans += to_string(tmp / val);
                     tmp = tmp % val;
-                    moved = false;
+                }
+                else {
+                    ans += to_string(atoi(num1.substr(0, 1).c_str()) / val);
+                    tmp = atoi(num1.substr(0, 1).c_str()) % val;
+                    num1.erase(0, 1);
                 }
             }
         }
         return large((isMinus ? "-" : "") + ans);
     }
     large operator/ (large val) {
-        if (string(val) == "0")
-            throw exception("Division by zero");
+        //if (string(val) == "0")
+        //    throw exception("Division by zero");
         bool isMinus = val.sign != sign;
         string num1 = num, num2 = string(val);
         large L = large(0), R = large(num1), m;
