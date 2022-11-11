@@ -27,19 +27,19 @@ public:
         if (sign == Sign::Minus)
             num.erase(0, 1);
     }
-    large operator+=(const large& value) {
+    large& operator+=(const large& value) {
         return *this = (*this + value);
     }
-    large operator-=(const large& value) {
+    large& operator-=(const large& value) {
         return *this = (*this - value);
     }
-    large operator*=(const large& value) {
+    large& operator*=(const large& value) {
         return *this = (*this * value);
     }
-    large operator/=(const large& value) {
+    large& operator/=(const large& value) {
         return *this = (*this / value);
     }
-    large operator%=(const large& value) {
+    large& operator%=(const large& value) {
         return *this = (*this % value);
     }
     large operator++(int d) {
@@ -51,6 +51,12 @@ public:
         auto tmp = *this;
         *this -= large(1);
         return tmp;
+    }
+    large& operator++() {
+        return *this += large(1);
+    }
+    large& operator--() {
+        return *this -= large(1);
     }
     bool operator== (large val) {
         string num1 = num, num2 = string(val);
@@ -129,7 +135,7 @@ public:
         if (num1 == num2) {
             return large(0);
         }
-        bool isMunus = val > * this;
+        bool isMunus = val > *this;
         if (isMunus)
             swap(num1, num2);
         reverse(num1.begin(), num1.end());
@@ -163,8 +169,7 @@ public:
             }
             for (int i = 0; i < nums.size(); i++) ans += nums[i];
             return large((isMinus ? "-" : "") + string(ans));
-        }
-        else {
+        } else {
             for (int i = 0; i < atoi(num2.c_str()); i++)
                 ans = ans + *this;
             return large((isMinus ? "-" : "") + string(ans));
@@ -193,8 +198,7 @@ public:
                     num1.erase(0, 1);
                     ans += to_string(tmp / val);
                     tmp = tmp % val;
-                }
-                else {
+                } else {
                     ans += to_string(atoi(num1.substr(0, 1).c_str()) / val);
                     tmp = atoi(num1.substr(0, 1).c_str()) % val;
                     num1.erase(0, 1);
@@ -236,13 +240,22 @@ public:
         if (val.sign == Sign::Plus) {
             for (large i; i < val; i = i + large(1))
                 ans = ans * large(this->num);
-        }
-        else {
+        } else {
             for (large i; i < large(string(val)); i++)
                 ans = ans / large(this->num);
         }
         if (isMinus && string(ans) != "0")
             ans.sign = Sign::Minus;
         return ans;
+    }
+    friend std::istream& operator>>(std::istream& is, large& lg) {
+        string s;
+        std::istream& val = is >> s;
+        lg = s;
+        return val;
+    }
+    friend std::ostream& operator<<(std::ostream& os, large lg) {
+        os << lg.ToString();
+        return os;
     }
 };
