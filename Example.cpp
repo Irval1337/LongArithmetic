@@ -1,19 +1,19 @@
-﻿#include <iostream>
+#include <iostream>
 #include <conio.h>
 #include "large.hpp"
 
 int main() {
     setlocale(LC_ALL, "RU");
-    string num1, num2;
+    large num1, num2;
     cout << "Первое число: ";
     getline(cin, num1);
     cout << "Первое число: ";
     getline(cin, num2);
-    cout << "\nСумма: " << (large(num1) + large(num2)).ToString() << endl;
-    cout << "Разность: " << (large(num1) - large(num2)).ToString() << endl;
-    cout << "Произведение: " << (large(num1) * large(num2)).ToString() << endl;
-    cout << "Частное: " << (large(num1) / large(num2)).ToString() << endl;
-    cout << "Остаток от деления: " << (large(num1) % large(num2)).ToString() << endl;
-    cout << "A в степени B: " << (large(num1).pow(large(num2))).ToString() << endl;
+    cout << "\nСумма: " << num1 + num2 << endl;
+    cout << "Разность: " << num1 - num2 << endl;
+    cout << "Произведение: " << num1 * num2 << endl;
+    cout << "Частное: " << num1 / num2 << endl;
+    cout << "Остаток от деления: " << num1 % num2 << endl;
+    cout << "A в степени B: " << num1.pow(num2) << endl;
     _getch();
 }
