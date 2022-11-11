@@ -250,12 +250,11 @@ public:
     }
     friend std::istream& operator>>(std::istream& is, large& lg) {
         string s;
-        std::istream& val = is >> s;
+        is >> s;
         lg = s;
-        return val;
+        return is;
     }
     friend std::ostream& operator<<(std::ostream& os, large lg) {
-        os << lg.ToString();
-        return os;
+        return os << lg.ToString();
     }
 };
