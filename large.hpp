@@ -42,12 +42,12 @@ public:
     large& operator%=(const large& value) {
         return *this = (*this % value);
     }
-    large operator++(int d) {
+    large operator++(::int32_t d) {
         auto tmp = *this;
         *this += large(1);
         return tmp;
     }
-    large operator--(int d) {
+    large operator--(::int32_t d) {
         auto tmp = *this;
         *this -= large(1);
         return tmp;
@@ -235,18 +235,14 @@ public:
         return (sign == Sign::Minus ? "-" : "") + num;
     }
     large pow(large val) {
-        large ans = 1;
-        bool isMinus = sign == Sign::Minus && large(string(val)) % large(2) != large(0);
-        if (val.sign == Sign::Plus) {
-            for (large i; i < val; i = i + large(1))
-                ans = ans * large(this->num);
-        } else {
-            for (large i; i < large(string(val)); i++)
-                ans = ans / large(this->num);
+        large res = 1, a = *this;
+        while (val != 0) {
+            if ((val.num.back() - '0') % 2)
+                res *= a;
+            a *= a;
+            val /= 2;
         }
-        if (isMinus && string(ans) != "0")
-            ans.sign = Sign::Minus;
-        return ans;
+        return res;
     }
     friend std::istream& operator>>(std::istream& is, large& lg) {
         string s;
