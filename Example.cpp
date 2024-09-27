@@ -1,19 +1,19 @@
 #include <iostream>
+#include "Large.h"
 #include <conio.h>
-#include "large.hpp"
 
 int main() {
     setlocale(LC_ALL, "RU");
-    large num1, num2;
-    cout << "Первое число: ";
-    cin >> num1;
-    cout << "Второе число: ";
-    cin >> num2;
-    cout << endl << "Сумма: " << num1 + num2 << endl;
-    cout << "Разность: " << num1 - num2 << endl;
-    cout << "Произведение: " << num1 * num2 << endl;
-    cout << "Частное: " << num1 / num2 << endl;
-    cout << "Остаток от деления: " << num1 % num2 << endl;
-    cout << "A в степени B: " << num1.pow(num2) << endl;
+    Large num1, num2;
+    std::cout << "First num:";
+    std::cin >> num1;
+    std::cout << "Second num:";
+    std::cin >> num2;
+    std::cout << std::endl << "first + second = " << num1 + num2 << std::endl;
+    std::cout << "first - second = " << num1 - num2 << std::endl;
+    std::cout << "first * second = " << num1 * num2 << std::endl;
+    std::cout << "first / second = " << num1 / num2 << std::endl;
+    std::cout << "first % second = " << num1 % num2 << std::endl;
+    std::cout << "first ^ second = " << pow(num1, num2) << std::endl;
     _getch();
 }
